@@ -26,8 +26,8 @@ Registration on the portal http://developers.paasmer.co, is necessary to connect
 
 * Download the SDK or clone it using the command below.
 ```
-$ git clone https://github.com/Paasmer/Arduino-YUN-SDK.git
-$ cd ARDUINO-YUN-SDK
+$ git clone https://github.com/PaasmerIoT/C-SDK-V2_0_1_2.git
+$ cd C-SDK-V2_0_1_2
 ```
 
 * To connect the device to Paasmer IoT Platfrom, the following steps need to be performed.
@@ -81,7 +81,7 @@ This script will also download and install libraries for openWRT to implement th
 
   NOTE: Do NOT close the terminal before the script finishes, otherwise you have to start over with this step. Make sure you are in your local terminal before repeating this step.  
 
-4. Copy and paste `Arduino-Yun-SDK/PAASMER-IoT-Arduino-Yun-Library` folder into Arduino libraries that was installed with your Arduino SDK installation. For Mac OS default, it should be under `Documents/Arduino/libraries`.
+4. Copy and paste `C-SDK-V2_0_1_2/PAASMER-IoT-Arduino-Yun-Library` folder into Arduino libraries that was installed with your Arduino SDK installation. For Mac OS default, it should be under `Documents/Arduino/libraries`.
 5. Restart the Arduino IDE if it was running during the installation. You should be able to see the PAASMER IoT examples in the Examples folder in your IDE.  
 
 There are the other two scripts: `PAASMERIoTArduinoYunScp.sh` and `PAASMERIoTArduinoYunSetupEnvironment.sh`, which are utilized in `PAASMERIoTArduinoYunInstallAll.sh`. You can always use `PAASMERIoTArduinoYunScp.sh` to upload your new credentials to your board. When you are in the directory `Arduino-Yun-SDK/`, the command should be something like this:  
