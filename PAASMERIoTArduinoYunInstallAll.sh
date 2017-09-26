@@ -1,5 +1,7 @@
 #!/bin/bash
 # If input args not correct, echo usage
+echo "Oopsssss ! Please Enter the Details as give Below"
+
 if [ $# -ne 3 ]; then
     echo "usage: ./PAASMERIoTArduinoYunInstallAll.sh <Board IP> <UserName> <Board Password>"
 else

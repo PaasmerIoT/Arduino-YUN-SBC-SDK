@@ -21,7 +21,7 @@
 #include<string.h>
 
 aws_iot_mqtt_client myClient; // init iot_mqtt_client
-char msg[512]; // read-write buffer
+char msg[650]; // read-write buffer
 int cnt = 1; // loop counts
 int rc = -200; // return value placeholder
 bool success_connect = false; // whether it is connected
@@ -37,15 +37,15 @@ void msg_callback(char* src, unsigned int len, Message_status_t flag) {
     int i;
        Serial.print(src);
      Serial.println("");
-    for(i=0;sensorpin[i];i++)
+    for(i=0;feedpin[i];i++)
     {
       if(strstr(src,feedname[i])){
       if(!strcmp(feedtype[i],"actuator")){
         if(strstr(src,"on")){
-          digitalWrite(sensorpin[i],HIGH);
+          digitalWrite(feedpin[i],HIGH);
           }
           else{
-            digitalWrite(sensorpin[i],LOW);
+            digitalWrite(feedpin[i],LOW);
             }
           }
       }
@@ -54,22 +54,24 @@ void msg_callback(char* src, unsigned int len, Message_status_t flag) {
   }
 }
 
-
 void setup() {
   Serial.begin(115200);
   Serial.print("started");
+  
   while(!Serial);
-   for(a=0;sensorpin[a];a++){
+     for(a=0;feedpin[a];a++){
     if(!strcmp(feedtype[a],"sensor")){
-      pinMode(sensorpin[a], INPUT);}
+      pinMode(feedpin[a], INPUT);}
     else {
-      pinMode(sensorpin[a],OUTPUT);
+      pinMode(feedpin[a],OUTPUT);
       }
     }
+    
 
  char curr_version[50];
   snprintf_P(curr_version, 50, PSTR("Paasmer IoT SDK Version(dev) %d.%d.%d-%s\n"), VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH, VERSION_TAG);
   Serial.println(curr_version);
+  
   strcpy(topicName,UserName);
   strcat(topicName,"_");
   strcat(topicName,DeviceName);
@@ -111,10 +113,9 @@ void loop() {
   if(success_connect) {
     
 		// Generate a new message in each loop and publish to "topic1"
-   for (i=0;sensorpin[i];i++){
-    snprintf(msg,sizeof(msg),"{\"feeds\":[{\"feedname\":\"%s\",\"feedtype\":\"%s\",\"feedpin\":\"%d\",\"feedvalue\":\"%d\"}],\"messagecount\":\"%d\",\"paasmerid\":\"%x\",\"username\":\"%s\",\"devicename\":\"%s\",\"devicetype\":\"SBC\"}",feedname[i],feedtype[i],sensorpin[i],digitalRead(sensorpin[i]),cnt,mac_id[3],UserName,DeviceName);
-	
-  if((rc = myClient.publish("paasmerv2_device_online", msg, strlen(msg), 1, false)) != 0) {
+   for (i=0;feedpin[i];i++){
+        snprintf(msg,sizeof(msg),"{\"feeds\":[{\"feedname\":\"%s\",\"feedtype\":\"%s\",\"feedpin\":\"%d\",\"feedvalue\":\"%d\"}],\"messagecount\":\"%d\",\"paasmerid\":\"%x\",\"username\":\"%s\",\"devicename\":\"%s\",\"devicetype\":\"YUN\",\"ThingName\":\"%s\"}",feedname[i],feedtype[i],feedpin[i],digitalRead(feedpin[i]),cnt,mac_id[3],UserName,DeviceName,ThingName);
+  if((rc = myClient.publish("paasmerv2_device_online_develop", msg, strlen(msg), 1, false)) != 0) {
       Serial.println(F("Publish failed!"));
       Serial.println(rc);
     }

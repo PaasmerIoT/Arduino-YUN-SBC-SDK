@@ -19,7 +19,7 @@ The **PAASMER-IOT-ARDUINO-YUN-SDK** provides functionality to create and maintai
 
 #### Pre Requisites
 
-Registration on the portal http://developers.paasmer.co, is necessary to connect the devices to the **Paasmer IoT Platfrom** .
+Registration on the [PAASMER portal](http://dashboard.paasmer.co/), is necessary to connect the devices to the **Paasmer IoT Platfrom** .
 
 <a name="installation"></a>
 ## Installation
@@ -33,16 +33,23 @@ $ cd C-SDK-V2_0_1_2
 * To connect the device to Paasmer IoT Platfrom, the following steps need to be performed.
 
 ```
+$ sudo chmod 777 ./*
 $ sudo ./install.sh
 ```
 
-This will install all required softwares.
+This will take some time to install the required softwares and packages.
+
+## Device Registration
+The Device Registration can be done in two ways, either through Web UI or Using command line.
+
+#### Using Command line
+
 * To register the device to the Paasmer IoT Platform, the following command need to be executed.
 
 ```
 $ sudo ./paasmerDeviceRegistration.sh
 ```
-This will ask for the device name. Give a unique device name for your device and that must be alphanumeric[a-z A-Z 0-9].
+This will ask for the UserName and DeviceName. Give a unique DeviceName for your device and that must be alphanumeric without any spaces[a-z A-Z 0-9].
 
 * Upon successful completion of the above command, the following commands need to be executed.
 ```
@@ -54,6 +61,26 @@ echo "-->  5) sed -i 's/alias PAASMER/#alias PAASMER/g' ~/.bashrc "
 echo "-->  6) exit "
 $ exit
 ```
+
+* Edit the config.h file to include the user name(Email), device name, feed names and GPIO pin details.
+
+```c
+#include "details.h"
+
+#define timePeriod 2 //change the time delay as you required for sending sensor values to paasmer cloud
+
+char feedname[][10]={"feed1","feed2","feed3","feed4","feed5","feed6"};
+
+char feedtype[][10]={"sensor","actuator","sensor","actuator","sensor","actuator"};
+
+int feedpin[]={2,8,3,9,4,10};
+
+```
+
+#### Using Web UI
+* Login to http://dashboard.paasmer.co/, create a device and download the credentials.
+* Copy the credential files from downloaded `zip` file and place them in the `<PAASMER-IoT-Python-Runtime/certs>` directory of the SDK.
+* Copy the `config.h` file in `<PAASMER-IoT-Arduino-Yun-Library/examples/BasicPubSub>` directory.
 
 ### Set up your Arduino Yún Board
 Please follow the instructions from official website: [Arduino Yún Guide](https://www.arduino.cc/en/Guide/ArduinoYun).
@@ -94,19 +121,6 @@ There are the other two scripts: `PAASMERIoTArduinoYunScp.sh` and `PAASMERIoTArd
 ### BasicPubSub
 * See the PAASMER IoT examples in the Examples folder in your IDEdemonstrates a simple MQTT publish/subscribe using PAASMER IoT from Arduino Yún board. It first subscribes to a topic once and registers a callback to print out new messages to Serial monitor and then publishes to the topic in a loop. Whenever it receives a new message, it will be printed out to Serial monitor indicating the callback function has been called.
 
-* Edit the config.h file to include the user name(Email), device name, feed names and GPIO pin details.
-
-```c
-#define UserName "Email Address" //your user name in website
-
-#define timePeriod 6 //change the time delay as you required for sending actuator values to paasmer cloud
-
-char* feedname[]={"feed1","feed2","feed3","feed4","feed5",.....}; //feed names you use in the website
-
-char* feedtype[]={"actuator","sensor","sensor","actuator","actuator",.....}; //modify with the type of feeds i.e., actuator or sensor
-
-int feedpin[]={3,5,7,11,13,....}; //modify with the pin numbers which you connected devices (actuator or sensor)
-```
 
 * **Hardware Required**  
 Arduino Yún  
