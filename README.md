@@ -19,7 +19,7 @@ The **PAASMER-IOT-ARDUINO-YUN-SDK** provides functionality to create and maintai
 
 #### Pre Requisites
 
-Registration on the [PAASMER portal](http://dashboard.paasmer.co/), is necessary to connect the devices to the **Paasmer IoT Platfrom** .
+Registration on the [PAASMER portal](http://developers.paasmer.co/), is necessary to connect the devices to the **Paasmer IoT Platfrom** .
 
 <a name="installation"></a>
 ## Installation
@@ -78,7 +78,7 @@ int feedpin[]={2,8,3,9,4,10};
 ```
 
 #### Using Web UI
-* Login to http://dashboard.paasmer.co/, create a device and download the credentials.
+* Login to http://developers.paasmer.co/, create a device and download the credentials.
 * Copy the credential files from downloaded `zip` file and place them in the `<PAASMER-IoT-Python-Runtime/certs>` directory of the SDK.
 * Copy the `config.h` file in `<PAASMER-IoT-Arduino-Yun-Library/examples/BasicPubSub>` directory.
 
