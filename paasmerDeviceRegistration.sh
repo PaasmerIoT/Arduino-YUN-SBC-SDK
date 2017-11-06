@@ -6,7 +6,7 @@ echo `rm -rf $path/PAASMER-IoT-Arduino-Yun-Library/examples/BasicPubSub/details.
 
 getting_unique()
 {
-realcounts=$(curl --data "deviceName="$devicename"&email="$username"" http://ec2-52-41-46-86.us-west-2.compute.amazonaws.com/paasmerv2DevAvailability_develop.php)
+realcounts=$(curl --data "deviceName="$devicename"&email="$username"" http://ec2-52-41-46-86.us-west-2.compute.amazonaws.com/paasmerv2DevAvailability.php)
 #echo $realcounts
 if [ $realcounts = "devicename_accepted" ]
 then
